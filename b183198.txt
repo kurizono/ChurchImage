@@ -1,0 +1,358 @@
+make "rcA 34.20  
+make "rcB 93.97 
+make "rcC 127.39
+make "rcD 350
+make "bcA 54.25
+make "bcB 93.97
+make "bcC 202.07
+make "bcD 350
+to carpet :A :B :C :D :color
+ pu home setxy :A -:B  
+  filled :color[
+  setxy :C -:D  
+  setxy -:C -:D 
+  setxy -:A -:B 
+  setxy :A -:B 
+  ]
+End
+
+
+make "scx 0.63
+make "scy 1
+make "ssx 10
+to asucare  :SCX :SCY :SSX
+repeat 100[
+ make "cx difference :cx :SCX 
+ make "cy sum :cy :SCY 
+ make "sx sum :sx :SSX
+ setxy :sx :cy 
+  if :sx>:cx [stop] 
+]
+end
+to bsucare :SCX :SCY :SSX
+repeat 100[
+ make "cx sum :cx :SCX 
+ make "cy sum :cy :SCY 
+make "sx difference :sx :SSX
+ setxy :sx :cy 
+  if :sx<:cx [stop] 
+]
+end
+
+to sucare
+pu home setxy 100 -350 pd 
+make "cx 202.07 make "cy -350
+make "sx 100 make"sy -350
+  repeat 13[
+  asucare :scx :scy :ssx 
+  make "cx -:cx 
+  bsucare :scx :scy :ssx
+  ]
+pu home setxy 100 -350 pd 
+make "cx -202.07 make "cy -350
+make "sx -100 make"sy -350
+repeat 13[
+  bsucare :scx :scy :ssx
+  make "cx -:cx 
+  asucare :scx :scy :ssx 
+  ]
+end
+
+to backgraund
+pu setxy -200 -100 pd
+filled"gray[
+setxy -350 -350
+setxy -202.07 -350
+setxy 0 0 
+]  
+pu setxy 200 -100 pd 
+filled"gray[
+setxy 350 -350
+setxy 202.07 -350
+setxy 0 0 
+] 
+  
+setwidth 10
+pu setxy -200 250 pd
+setcolor(15)setxy -280 350
+pu setxy 200 250 pd
+setxy 280 350
+setwidth 2
+  
+setcolor(6)
+  pu setxy 0 100 pd
+repeat 36 [ rt 10 repeat 4 [ fd 60 lt 90]]
+
+setcolor(15)
+pu setxy -20 350 pd 
+setxy -200 250
+setxy -200 -20
+setxy 200 -20
+setxy 200 250
+setxy 20 350
+
+pu setxy -98.49 -20 pd
+filled"orange[
+setxy 98.49 -20
+setxy 200 -100
+setxy -200 -100
+]
+pu setxy -200 -100 pd
+filled"orange[
+setxy -200 -70
+setxy 200 -70
+setxy 200 -100
+]
+
+setcolor(14)
+pu setxy -70 -60 pd
+filled"brown[
+setxy 70 -60
+setxy 70 -50
+setxy -70 -50
+]
+pu setxy -50 -50 pd
+filled"brown[
+setxy 50 -50
+setxy 50 0
+setxy -50 0
+]
+pu setxy -65 0 pd
+filled"brown[
+setxy 65 0
+setxy 65 10
+setxy -65 10
+]
+pu setxy -20 10 pd
+filled"brown[
+setxy 20 10
+setxy 20 20
+setxy -20 20
+]
+pu setxy -40 0 pd setxy -40 -50
+pu setxy 40 0 pd setxy 40 -50 
+
+setwidth 1
+setcolor(15)
+
+pu setxy -200 250  pd setxy -98.49 168.79 
+setxy 0 250 setxy 98.49 168.79 setxy 200 250 pu setxy 0 300 pd setcolor "cyan fill
+setcolor(15) pu setxy 98.49 168.79 pd setxy 98.49 -20 pu setxy -98.49 168.79 pd setxy -98.49 -20
+
+
+pu setxy -200 250 pd
+filled"tan[
+setxy -150 250
+setxy -150 -100
+setxy -200 -100
+]
+pu setxy 200 250 pd
+filled"tan[
+setxy 150 250
+setxy 150 -100
+setxy 200 -100
+]
+
+
+pu setxy -195 80 pd
+filled"cyan[
+setxy -195 -20
+  setxy -155 -20
+setxy -155 80
+setxy -175 80 
+seth -90
+arc 180 20
+]
+pu setxy 195 80 pd
+filled"cyan[
+setxy 195 -20
+  setxy 155 -20
+setxy 155 80
+setxy 195 80
+setxy 175 80
+  arc 180 20 
+]
+
+pu
+setcolor(6)  
+setxy -172 10
+pd
+repeat 8 [rt 45 repeat 6 [repeat 90 [fd 0.25 rt 2] rt 90]]
+pu
+setxy 182 10
+pd
+repeat 8 [rt 45 repeat 6 [repeat 90 [fd 0.25 rt 2] rt 90]]
+  
+ setcolor(14) setwidth 9
+pu setxy 0 150 pd setxy 0 30 
+  pu setxy 30 110 pd setxy -30 110 pu
+ setwidth 1
+
+setxy -100 340
+setcolor "blue fill  pu 
+setxy 100 340  
+setcolor "blue fill  pu
+  
+
+end
+
+
+to cheara  repeat 300 [
+    seth 180 
+    make "roady :chearx*-1.73
+    fd 1 
+    make "cheary sum :cheary -1
+    make "count sum :count 1
+    if :roady>:cheary [stop] 
+  ] 
+end
+
+to chearb
+  setcolor(7)
+  make "count 0
+  pu
+  setxy :chearx :cheary
+  pd
+  cheara
+  seth 270 
+  make "z difference :chearx  385
+  fd :z
+  seth 0 fd :count
+  seth 90 fd :z pu  
+end
+
+to chearc 
+repeat 300 [
+    seth 180 
+    make "roady :chearx*1.73
+    fd 1 
+    make "cheary sum :cheary -1
+    make "count sum :count 1
+    if :roady>:cheary [stop] 
+  ] 
+end
+
+to cheard
+  setcolor(7)
+  make "count 0
+  pu
+  setxy :chearx :cheary
+  pd
+  chearc
+  seth 270 
+  make "z difference :chearx  -385
+  fd :z
+  seth 0 fd :count
+  seth 90 fd :z pu  
+end
+
+carpet :bcA :bcB :bcC :bcD "tan
+sucare
+pu setxy 0 -350 
+repeat 28[
+  setcolor "brown fill
+  fd 10
+]
+carpet :rcA :rcB :rcC :rcD "red
+setwidth 2
+sucare
+backgraund
+
+
+
+make "chearx 75
+make "cheary -30
+filled "brown[
+  chearb
+]
+make "chearx 75
+make "cheary -30
+chearb
+ 
+make "chearx 105
+make "cheary -42
+filled "brown[
+  chearb
+]
+make "chearx 105
+make "cheary -42
+chearb
+
+make "chearx 140
+make "cheary -56
+filled "brown[
+  chearb
+]
+make "chearx 140
+make "cheary -56
+chearb
+
+make "chearx 200
+make "cheary -80
+filled "brown[
+  chearb
+]
+make "chearx 200
+make "cheary -80
+chearb
+  
+make "chearx 285
+make "cheary -114
+filled "brown[
+  chearb
+]
+make "chearx 285
+make "cheary -114
+chearb
+
+
+
+
+make "chearx -75
+make "cheary -30
+filled "brown[
+  cheard
+]
+make "chearx -75
+make "cheary -30
+cheard
+ 
+make "chearx -105
+make "cheary -42
+filled "brown[
+  cheard
+]
+make "chearx -105
+make "cheary -42
+cheard
+
+make "chearx -140
+make "cheary -56
+filled "brown[
+  cheard
+]
+make "chearx -140
+make "cheary -56
+cheard
+
+make "chearx -200
+make "cheary -80
+filled "brown[
+  cheard
+]
+make "chearx -200
+make "cheary -80
+cheard
+  
+make "chearx -285
+make "cheary -114
+filled "brown[
+cheard
+]
+make "chearx -285
+make "cheary -114
+cheard
+setxy 340 340
+setcolor "orange fill
+setxy -340 340
+setcolor "orange fill
